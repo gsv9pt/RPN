@@ -1,0 +1,12 @@
+mov $0xC0, %r3
+mov $0x00, %r0
+mov $0x01, %r1
+add $0x01, %r3
+top:
+add $0xFF, %r3
+add %r0, %r1
+neg %r0
+add %r1, %r0
+mov %r0, (%r3)
+add $0x02, %r3
+jump %r3, %r2
