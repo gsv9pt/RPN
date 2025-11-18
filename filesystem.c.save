@@ -1,0 +1,126 @@
+/*******************************************************
+ * CS 2130 Homework 8
+ * Fall 2025 - Simplified File System 
+ *
+ * Computing ID: gsv9pt
+ * Sources: Cite your sources, including any GenAI
+ *          usage.  (See syllabus for full details)
+ *******************************************************/
+
+//TODO: Remember to add include statement here. 
+
+#include "filesystem.h"
+
+dir_node *create_dir(const char *name) {
+if (name == NULL){      // if the caller gives no name return null
+	return NULL;
+}
+
+dir_node *newdir = malloc(sizeof(dir_node));  // enough bytes for dir node, returns a memory address that is stored in newdir (pointer to dir_node)
+if (newdir == NULL) {
+	return NULL;
+}
+
+newdir->name = name;
+newdir->parent = NULL;
+newdir->next = NULL;
+newdir->subdirs = NULL;
+newdir->files = NULL;
+
+return newdir;
+}
+
+
+
+
+
+
+
+
+dir_node *root_dir(void *node) {
+  return NULL;
+}
+
+file_node *first_file(dir_node *dir) {
+  return NULL;
+}
+
+file_node *last_file(dir_node *dir) {
+  return NULL;
+}
+
+unsigned long dir_entries(dir_node *dir) {
+  return 0;
+}
+
+file_node *find_file(dir_node *dir, const char *name) {
+  return NULL;
+}
+
+
+dir_node *find_dir(dir_node *dir, const char *name) {
+  return NULL;
+}
+
+file_node *remove_file(dir_node *dir, file_node *file) {
+  return NULL;
+}
+
+dir_node *remove_dir(dir_node *dir, dir_node *subdir) {
+  return NULL;
+}
+
+file_node *insert_file(dir_node *dir, const char *name, int size, const char *after) {
+  return NULL;
+}
+
+dir_node *insert_dir(dir_node *dir, const char *name, const char *after) {
+  return NULL;
+}
+
+
+
+// The following function has been provided for you
+void directory_list(dir_node *root, int indent) {
+  // Stop if the root is null (nowhere to go)
+  if (root == NULL)
+    return;
+
+  // If indent is 0, we need to start at 4 for correct indentation
+  if (!indent)
+    indent = 4;
+  
+  // Print the current directory node
+  printf("%*s %s (%ld entries)\n", indent, "-(D)", root->name, dir_entries(root));
+
+  // Recursively print the subdirectories and their contents
+  indent += 4;
+  for (dir_node *i = root->subdirs; i != NULL; i = i->next) {
+    directory_list(i, indent);
+  }
+
+  // Print out the files (no recursion needed)
+  for (file_node *i = root->files; i != NULL; i = i->next) {
+    printf("%*s %s (%d bytes)\n", indent, "-(F)", i->name, i->size);
+  }
+}
+
+// Test your code in main
+int main(int argc, const char *argv[]) {
+
+  //TODO: test your code more than this
+  dir_node *d = create_dir("Top");
+ 
+  dir_node *fd = insert_dir(d, "First Dir", NULL);
+  dir_node *sd = insert_dir(d, "Second Dir", "First Dir"); 
+
+  insert_file(d, "First File", 42, NULL);
+  insert_file(fd, "Second File", 67, NULL);
+  insert_file(fd, "Third File", 21, "Second File");
+  insert_file(sd, "Fourth File", 0, NULL);
+
+  // print the directory listing starting at the root for sd
+  directory_list(root_dir(sd), 0);
+
+  return 0;
+}
