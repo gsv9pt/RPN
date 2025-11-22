@@ -23,7 +23,7 @@ void pstack(node *top, int first) {
     }
     if (first) 
         printf("[ ");
-    printf("%d", top->value);
+    printf("%d", top->num);
     if (top->next) {
         printf(", ");
         pstack(top->next, 0);
@@ -80,7 +80,7 @@ return a / b;
 }
 
 
-}
+
 
 
 }
