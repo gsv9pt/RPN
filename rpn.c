@@ -79,9 +79,7 @@ else if(o == '/'){
 return a / b;
 }
 
-
-
-
+return 0;
 
 }
 
@@ -99,15 +97,23 @@ fgets(input, sizeof(input), stdin); // gets the characters
 node *top = NULL;    // sets top pointer
 char *cur = input;    // sets another pointer that goes through input
 
-while(*cur != '\0'){    // while string is not nothing check values
-     if(isdigit(*cur)){    // check if cur pointer is char is 0-9
-     int num = *cur - '0';  // if it is set int num to cur - 0 because of ASCII, this will give actuall value
-     push(&top, num);      // call push to put on stack 
-     }
+while(*cur != '\0'){     // while string is not nothing check values
+    if (isspace(*cur)){    // if there's a space continue on
+       cur++;
+       }
+
+    if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
+       char *end;                                            // creates a pointer to track the charater after number is made
+       long num = strtol(cur, &end, 10);                  // reads chars tracked by cur until number is done, then end points to char after, 10 is the base
+
+       push(&top, (int)num); // push num to stack
+
+       cur = end;    // cur now starts at end pointer
+       }
 
 switch (*cur){
 
-case '+':       // if cur is +,-,*
+case '+':       // if cur is +,-,*,/
 case '-':
 case '*':
 case '/':{
@@ -115,7 +121,9 @@ case '/':{
 int b = pop(&top);      // pop twos nums from stack
 int a = pop(&top);
 int answer = calculate(a, b, *cur);  // preform calc with those nums
+
 push(&top, answer);       // push result on stack 
+
 break;
 
 }
@@ -123,19 +131,21 @@ break;
 case ' ':
 break;           // skip whitespace
 
+case '\n':       // skip next lines
+break;
+
 default:
 
 pstack(top,1); // if unrecognized stop
 
-break;
+return 0;
 
 }
 
-cur += 1;  // increment cur
+cur ++;  // increment cur
 
 }
 pstack(top,1);  // answer
-
 return 0;
 
 }
