@@ -15,6 +15,22 @@ struct node *next;
 
 }node;
 
+void pstack(node *top, int first) {
+    if (!top) { 
+        if (first) 
+            puts ("[ ]"); 
+        return; 
+    }
+    if (first) 
+        printf("[ ");
+    printf("%d", top->value);
+    if (top->next) {
+        printf(", ");
+        pstack(top->next, 0);
+    } else {
+        puts(" ]");
+    }
+}
 
 
 
@@ -63,9 +79,7 @@ else if(o == '/'){
 return a / b;
 }
 
-else {
-printf("There is an invalid operator %c\n", o);
-exit(1);  // stop
+
 }
 
 
@@ -111,7 +125,7 @@ break;           // skip whitespace
 
 default:
 
-printf("There is an unrecognized input %c\n", *cur); // if unrecognized stop
+pstack(top,1); // if unrecognized stop
 
 break;
 
@@ -120,7 +134,7 @@ break;
 cur += 1;  // increment cur
 
 }
-printf("Answer is: %d/n", pop(&top));  // answer
+pstack(top,1);  // answer
 
 return 0;
 
