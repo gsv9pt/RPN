@@ -99,7 +99,13 @@ char *cur = input;    // sets another pointer that goes through input
 while(*cur != '\0'){     // while string is not nothing check values
     if (isspace(*cur)){    // if there's a space continue on
        cur++;
+       continue;
        }
+
+    if (*cur == '\n'){    // if next line continue
+       cur++;
+       continue;
+    }
 
     if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
        char *end;                                            // creates a pointer to track the charater after number is made
@@ -108,6 +114,8 @@ while(*cur != '\0'){     // while string is not nothing check values
        push(&top, (int)num); // push num to stack
 
        cur = end;    // cur now starts at end pointer
+
+       continue;
        }
 
 switch (*cur){
@@ -126,12 +134,6 @@ push(&top, answer);       // push result on stack
 break;
 
 }
-
-case ' ':
-break;           // skip whitespace
-
-case '\n':       // skip next lines
-break;
 
 default:
 
