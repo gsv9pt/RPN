@@ -99,10 +99,6 @@ while(*cur != '\0'){     // while string is not nothing check values
        cur++;
        continue;
        }
-
-    if (*cur == '\n'){    // if next line continue
-       cur++;
-       continue;
     }
 
     if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
