@@ -113,7 +113,6 @@ while(*cur != '\0'){     // while string is not nothing check values
        long num = strtol(cur, &end, 10);                  // reads chars tracked by cur until number is done, then end points to char after, 10 is the base
 
        push(&top, (int)num); // push num to stack
-       pstack(top,1);        //print
        cur = end;    // cur now starts at end pointer
 
        continue;
@@ -138,7 +137,6 @@ int a = pop(&top);
 int answer = calculate(a, b, *cur);  // preform calc with those nums
 
 push(&top, answer);       // push result on stack 
-pstack(top,1);
 cur++;
 continue;
 
