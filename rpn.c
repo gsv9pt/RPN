@@ -89,8 +89,6 @@ int main(){
 
 char input[256];    // creates array for stdin
 
-printf("Enter your values");   // promt for user
-
 fgets(input, sizeof(input), stdin); // gets the characters
 
 node *top = NULL;    // sets top pointer
