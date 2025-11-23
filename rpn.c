@@ -88,10 +88,12 @@ return 0;
 int main(){
 
 char input[256];    // creates array for stdin
-
-fgets(input, sizeof(input), stdin); // gets the characters
-
 node *top = NULL;    // sets top pointer
+int tokens = 0; // tracks if there is a good token
+    
+while (fgets(input, sizeof(input), stdin)); // gets the characters
+
+
 char *cur = input;    // sets another pointer that goes through input
 
 while(*cur != '\0'){     // while string is not nothing check values
@@ -106,11 +108,12 @@ while(*cur != '\0'){     // while string is not nothing check values
 
     
     if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
+       tokens = 1;
        char *end;                                            // creates a pointer to track the charater after number is made
        long num = strtol(cur, &end, 10);                  // reads chars tracked by cur until number is done, then end points to char after, 10 is the base
 
        push(&top, (int)num); // push num to stack
-
+       pstack(top,1);        //print
        cur = end;    // cur now starts at end pointer
 
        continue;
@@ -123,6 +126,8 @@ case '-':
 case '*':
 case '/':{
 
+tokens = 1;
+    
 if(top == NULL || top->next == NULL){  // stack empty or only one num print num
       pstack(top,1); 
       return 0;
@@ -133,8 +138,9 @@ int a = pop(&top);
 int answer = calculate(a, b, *cur);  // preform calc with those nums
 
 push(&top, answer);       // push result on stack 
-
-break;
+pstack(top,1);
+cur++;
+continue;
 
 }
 
@@ -151,8 +157,15 @@ return 0;
 }
 
 cur ++;  // increment cur
-
 }
+
+}   // end of while fgets loop
+
+if (!tokens){
+    puts("[]");
+    return 0;
+}
+
 pstack(top,1);  // answer
 return 0;
 
