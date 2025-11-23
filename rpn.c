@@ -99,7 +99,7 @@ while(*cur != '\0'){     // while string is not nothing check values
        cur++;
        continue;
        }
-    }
+
 
     if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
        char *end;                                            // creates a pointer to track the charater after number is made
@@ -119,6 +119,11 @@ case '-':
 case '*':
 case '/':{
 
+if(top == NULL || top->next == NULL){  // stack empty or only one num print num
+      pstack(top,1); 
+      return 0;
+      }
+    
 int b = pop(&top);      // pop twos nums from stack
 int a = pop(&top);
 int answer = calculate(a, b, *cur);  // preform calc with those nums
