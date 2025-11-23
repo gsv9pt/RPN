@@ -99,8 +99,12 @@ while(*cur != '\0'){     // while string is not nothing check values
        cur++;
        continue;
        }
-
-
+    if (*cur == '\n'){
+       cur++
+       continue;
+       }
+}
+    
     if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
        char *end;                                            // creates a pointer to track the charater after number is made
        long num = strtol(cur, &end, 10);                  // reads chars tracked by cur until number is done, then end points to char after, 10 is the base
@@ -153,3 +157,4 @@ pstack(top,1);  // answer
 return 0;
 
 }
+
