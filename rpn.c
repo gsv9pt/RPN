@@ -91,7 +91,7 @@ char input[256];    // creates array for stdin
 node *top = NULL;    // sets top pointer
 int tokens = 0; // tracks if there is a good token
     
-while (fgets(input, sizeof(input), stdin)); // gets the characters
+while (fgets(input, sizeof(input), stdin)){  // gets the characters
 
 
 char *cur = input;    // sets another pointer that goes through input
