@@ -129,6 +129,10 @@ break;
 
 }
 
+case '\0': // end of good input
+break;
+
+    
 default:
 
 pstack(top,1); // if unrecognized stop
