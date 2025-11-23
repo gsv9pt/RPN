@@ -103,7 +103,7 @@ while(*cur != '\0'){     // while string is not nothing check values
        cur++
        continue;
        }
-}
+
     
     if(isdigit(*cur) || ((*cur=='-') && isdigit(cur[1]))){        // detects numbers and negative numbers
        char *end;                                            // creates a pointer to track the charater after number is made
