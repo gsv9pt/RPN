@@ -100,7 +100,7 @@ while(*cur != '\0'){     // while string is not nothing check values
        continue;
        }
     if (*cur == '\n'){
-       cur++
+       cur++;
        continue;
        }
 
